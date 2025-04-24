@@ -14,11 +14,20 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+rn_maps_path = '../node_modules/react-native-maps'
+pod 'react-native-maps', :path => rn_maps_path
+pod 'react-native-google-maps', :path => rn_maps_path
+pod 'react-native-maps-generated', :path => rn_maps_path
+
+
 target 'AwesomeProject' do
   config = use_native_modules!
 
   use_react_native!(
     :path => config[:reactNativePath],
+    :hermes_enabled => false,
+    :fabric_enabled => false,       # optional: disable Fabric too
+    
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
